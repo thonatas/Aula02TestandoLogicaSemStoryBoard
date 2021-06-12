@@ -6,73 +6,16 @@
 //
 
 import UIKit
+import SnapKit
 
 class ViewController: UIViewController {
+    
+    private let slider: UISlider = UISlider()
+    private let label: UILabel = UILabel()
+    private let textField: UITextField = UITextField()
+    private let stepper: UIStepper = UIStepper()
+    private let vamosLaButton: UIButton = UIButton()
 
-    override func loadView() {
-        let view = UIView(frame: UIScreen.main.bounds)
-        view.backgroundColor = .white
-        self.view = view
-    }
-    
-    lazy var slider: UISlider = {
-        let slider = UISlider()
-        slider.minimumValue = 0.0
-        slider.maximumValue = 100.0
-        slider.isContinuous = true
-        slider.addTarget(self, action: #selector(self.sliderValueChanged(_:)), for: .valueChanged)
-        slider.translatesAutoresizingMaskIntoConstraints = false
-        return slider
-    }()
-    
-    lazy var label: UILabel = {
-        let label = UILabel()
-        label.text = "Valor: 0"
-        label.font = UIFont.preferredFont(forTextStyle: .body)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var textField: UITextField = {
-        let textField = UITextField()
-        textField.text = "0"
-        textField.borderStyle = UITextField.BorderStyle.roundedRect
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        return textField
-    }()
-    
-    lazy var stepper: UIStepper = {
-        let stepper = UIStepper()
-        stepper.wraps = false
-        stepper.autorepeat = true
-        stepper.maximumValue = 150
-        stepper.addTarget(self, action: #selector(self.stepperValueChanged(_:)), for: .valueChanged)
-        stepper.translatesAutoresizingMaskIntoConstraints = false
-        return stepper
-    }()
-    
-    lazy var vamosLaButton: UIButton = {
-        let button = UIButton(type: UIButton.ButtonType.system) as UIButton
-        
-        let xPostion:CGFloat = 100
-        let yPostion:CGFloat = 400
-        let buttonWidth:CGFloat = 150
-        let buttonHeight:CGFloat = 45
-        
-        button.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
-        
-        button.backgroundColor = .white
-        button.setTitle("Vamos lá", for: UIControl.State.normal)
-        button.tintColor = .systemBlue
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    @objc func buttonAction(_ sender: UIButton!) {
-        print("OK")
-    }
-    
     var sliderValue = 0
     var stepperValue = 0
     var sumValues = 0
@@ -80,47 +23,103 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        view.backgroundColor = .white
+        addTextField()
+        addLabel()
+        addSlider()
+        addStepper()
+        addVamosLaButton()
+
+    }
+    
+    private func addSlider() {
         view.addSubview(slider)
+        
+        slider.minimumValue = 0.0
+        slider.maximumValue = 100.0
+        slider.isContinuous = true
+        slider.addTarget(self, action: #selector(self.sliderValueChanged(_:)), for: .valueChanged)
+        slider.translatesAutoresizingMaskIntoConstraints = false
+        
+        slider.snp.makeConstraints { (make) in
+            make.leading.equalTo(view.snp.leading).offset(30)
+            make.trailing.equalTo(view.snp.trailing).offset(-30)
+            make.bottom.equalTo(label.snp.top).offset(-30)
+        }
+    }
+    
+    private func addLabel() {
         view.addSubview(label)
+        
+        label.text = "Valor: 0"
+        label.font = UIFont.preferredFont(forTextStyle: .body)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        
+        label.snp.makeConstraints { (make) in
+            make.centerX.equalTo(view.snp.centerX)
+            make.bottom.equalTo(textField.snp.top).offset(-30)
+        }
+    }
+    
+    private func addTextField() {
         view.addSubview(textField)
+        
+        textField.text = "0"
+        textField.borderStyle = UITextField.BorderStyle.roundedRect
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        
+        textField.snp.makeConstraints { (make) in
+            make.center.equalTo(view)
+            make.leading.equalTo(view.snp.leading).offset(30)
+            make.trailing.equalTo(view.snp.trailing).offset(-30)
+        }
+    }
+    
+    private func addStepper() {
         view.addSubview(stepper)
+        
+        stepper.wraps = false
+        stepper.autorepeat = true
+        stepper.maximumValue = 150
+        stepper.addTarget(self, action: #selector(self.stepperValueChanged(_:)), for: .valueChanged)
+        stepper.translatesAutoresizingMaskIntoConstraints = false
+        
+        stepper.snp.makeConstraints { (make) in
+            make.top.equalTo(textField.snp.bottom).offset(30)
+            make.centerX.equalTo(view.snp.centerX)
+        }
+    }
+    
+    private func addVamosLaButton() {
         view.addSubview(vamosLaButton)
         
-        sliderConstraints()
-        labelConstraints()
-        textFieldConstraints()
-        stepperConstraints()
-        buttonConstraints()
+        let xPostion:CGFloat = 100
+        let yPostion:CGFloat = 400
+        let buttonWidth:CGFloat = 150
+        let buttonHeight:CGFloat = 45
+        
+        vamosLaButton.frame = CGRect(x:xPostion, y:yPostion, width:buttonWidth, height:buttonHeight)
+        vamosLaButton.backgroundColor = .white
+        vamosLaButton.setTitle("Vamos lá", for: .normal)
+        vamosLaButton.setTitleColor(.systemBlue, for: .normal)
+        vamosLaButton.tintColor = .systemBlue
+        vamosLaButton.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
+        vamosLaButton.translatesAutoresizingMaskIntoConstraints = false
+        
+        vamosLaButton.snp.makeConstraints { (make) in
+            make.top.equalTo(stepper.snp.bottom).offset(40)
+            make.centerX.equalTo(view.snp.centerX)
+            make.leading.equalTo(view.snp.leading).offset(30)
+            make.trailing.equalTo(view.snp.trailing).offset(-30)
+        }
     }
     
-    func sliderConstraints() {
-        slider.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
-        slider.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30).isActive = true
-        slider.bottomAnchor.constraint(equalTo: label.topAnchor, constant: -30).isActive = true
-    }
-    
-    func labelConstraints() {
-        label.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-        label.bottomAnchor.constraint(equalTo: textField.topAnchor, constant: -30).isActive = true
-    }
-    
-    func textFieldConstraints() {
-        textField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-        textField.centerYAnchor.constraint(equalTo: self.view.centerYAnchor, constant: 0).isActive = true
-        textField.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
-        textField.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30).isActive = true
-    }
-    
-    func stepperConstraints() {
-        stepper.topAnchor.constraint(equalTo: textField.bottomAnchor, constant: 30).isActive = true
-        stepper.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-    }
-    
-    func buttonConstraints() {
-        vamosLaButton.topAnchor.constraint(equalTo: stepper.bottomAnchor, constant: 40).isActive = true
-        vamosLaButton.centerXAnchor.constraint(equalTo: self.view.centerXAnchor, constant: 0).isActive = true
-        vamosLaButton.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 30).isActive = true
-        vamosLaButton.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -30).isActive = true
+    @objc func buttonAction(_ sender: UIButton!) {
+        let viewController = SecondViewController()
+        viewController.view.backgroundColor = .blue
+
+        navigationController?.present(viewController, animated: true, completion: nil)
+        print(#function)
     }
     
     @objc func stepperValueChanged(_ sender:UIStepper!) {

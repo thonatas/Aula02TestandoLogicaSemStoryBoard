@@ -3,15 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		18888A7426754228002AE79F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 18888A7326754228002AE79F /* SnapKit */; };
 		18C70E572672E4390056AD69 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C70E562672E4390056AD69 /* AppDelegate.swift */; };
 		18C70E592672E4390056AD69 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C70E582672E4390056AD69 /* SceneDelegate.swift */; };
 		18C70E5B2672E4390056AD69 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C70E5A2672E4390056AD69 /* ViewController.swift */; };
 		18C70E602672E4390056AD69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 18C70E5F2672E4390056AD69 /* Assets.xcassets */; };
 		18C70E632672E4390056AD69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 18C70E612672E4390056AD69 /* LaunchScreen.storyboard */; };
+		18C70E6B2672F5680056AD69 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18C70E6A2672F5680056AD69 /* SecondViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,7 @@
 		18C70E5F2672E4390056AD69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		18C70E622672E4390056AD69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		18C70E642672E4390056AD69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		18C70E6A2672F5680056AD69 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +32,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18888A7426754228002AE79F /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,6 +61,7 @@
 				18C70E562672E4390056AD69 /* AppDelegate.swift */,
 				18C70E582672E4390056AD69 /* SceneDelegate.swift */,
 				18C70E5A2672E4390056AD69 /* ViewController.swift */,
+				18C70E6A2672F5680056AD69 /* SecondViewController.swift */,
 				18C70E5F2672E4390056AD69 /* Assets.xcassets */,
 				18C70E612672E4390056AD69 /* LaunchScreen.storyboard */,
 				18C70E642672E4390056AD69 /* Info.plist */,
@@ -80,6 +85,9 @@
 			dependencies = (
 			);
 			name = Aula02TestandoLogicaSemStoryBoard;
+			packageProductDependencies = (
+				18888A7326754228002AE79F /* SnapKit */,
+			);
 			productName = Aula02TestandoLogicaSemStoryBoard;
 			productReference = 18C70E532672E4390056AD69 /* Aula02TestandoLogicaSemStoryBoard.app */;
 			productType = "com.apple.product-type.application";
@@ -107,6 +115,9 @@
 				Base,
 			);
 			mainGroup = 18C70E4A2672E4390056AD69;
+			packageReferences = (
+				18888A7226754228002AE79F /* XCRemoteSwiftPackageReference "SnapKit" */,
+			);
 			productRefGroup = 18C70E542672E4390056AD69 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -133,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				18C70E6B2672F5680056AD69 /* SecondViewController.swift in Sources */,
 				18C70E5B2672E4390056AD69 /* ViewController.swift in Sources */,
 				18C70E572672E4390056AD69 /* AppDelegate.swift in Sources */,
 				18C70E592672E4390056AD69 /* SceneDelegate.swift in Sources */,
@@ -329,6 +341,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		18888A7226754228002AE79F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		18888A7326754228002AE79F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 18888A7226754228002AE79F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 18C70E4B2672E4390056AD69 /* Project object */;
 }
